@@ -1,7 +1,8 @@
 {
   "name": "nechaienko/laravel-mongodb-logging",
-  "version": "1.0.0",
+  "type": "library",
   "description": "Custom Larvel 5.6+ Log channel handler that can store log events to MongoDB databases. Uses Laravel native logging functionality.",
+  "version": "1.0.0",
   "keywords": [
     "laravel",
     "logging",
@@ -10,19 +11,16 @@
     "db",
     "mongodb"
   ],
-  "type": "library",
   "authors": [
     {
-      "name": "Sergii Nechaienko",
+      "name": "SergiiNechaienko",
       "email": "sergii.nechaenko@gmail.com"
     }
   ],
   "require": {
     "php": ">=7.1",
-    "illuminate/support": "~5.6",
-    "nechaienko/laravel-mongodb-logging": "dev-master"
+    "illuminate/support": "~5.6"
   },
-  "minimum-stability": "dev",
   "require-dev": {
     "orchestra/testbench": "~3.6",
     "jenssegers/mongodb": "~3.4"
@@ -32,6 +30,11 @@
       "dont-discover": [
         "*"
       ]
+    }
+  },
+  "autoload": {
+    "psr-4": {
+      "Nechaienko\\MongodbLogging": "src"
     }
   }
 }
