@@ -19,12 +19,13 @@ class MongoDbModel extends Eloquent
 
     public const FIELDS_TO_SET = [
         'message',
+        'context',
         'level',
         'level_name',
         'channel',
         'datetime',
         'extra',
-        'detailed',
+        'formatted',
     ];
 
     function __construct($connection = 'mongodb', $collection = 'log')
