@@ -17,5 +17,12 @@
   "require-dev": {
     "orchestra/testbench": "~3.6",
     "jenssegers/mongodb": "~3.4"
+  },
+  "extra": {
+    "laravel": {
+      "dont-discover": [
+        "*"
+      ]
+    }
   }
 }
