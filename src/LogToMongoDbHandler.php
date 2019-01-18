@@ -21,6 +21,7 @@ class LogToMongoDbHandler extends AbstractProcessingHandler
     protected $connection;
     protected $collection;
     protected $mongoDbModel = MongoDbModel::class;
+    protected $additionalFields = [];
 
     /**
      * LogToMongoDbHandler constructor.
@@ -46,6 +47,14 @@ class LogToMongoDbHandler extends AbstractProcessingHandler
     }
 
     /**
+     * @param MongoDbModel $mongoDbModel
+     */
+    public function setAdditionalFields(array $additionalFields): void
+    {
+        $this->additionalFields = $additionalFields;
+    }
+
+    /**
      * @param array $record
      */
     protected function write(array $record): void
@@ -54,6 +63,7 @@ class LogToMongoDbHandler extends AbstractProcessingHandler
             try {
                 $log = new $this->mongoDbModel($this->connection, $this->collection);
                 $this->fill($log, $record);
+                $this->fillAdditional($log);
                 $log->save();
             } catch (\Exception $e) {
                 //
@@ -70,6 +80,16 @@ class LogToMongoDbHandler extends AbstractProcessingHandler
             if (isset($record[$fieldKey])) {
                 $log->{$fieldKey} = $record[$fieldKey];
             }
+        }
+    }
+
+    /**
+     * @param array $record
+     */
+    protected function fillAdditional(MongoDbModel $log): void
+    {
+        foreach ($this->additionalFields as $fieldKey => $fieldValue) {
+            $log->{$fieldKey} = $fieldValue;
         }
     }
 }

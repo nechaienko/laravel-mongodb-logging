@@ -19,6 +19,7 @@ class LogToMongoDb
     protected const LEVEL_INDEX = 'level';
     protected const NAME_INDEX = 'name';
     protected const CUSTOM_MODEL_INDEX = 'custom_model';
+    protected const ADDITIONAL_FIELDS_INDEX = 'additional_fields';
 
     protected const DEFAULT_CONFIG = [
         self::CONNECTION_INDEX => 'mongodb',
@@ -26,6 +27,7 @@ class LogToMongoDb
         self::LEVEL_INDEX => 'info',
         self::NAME_INDEX => 'mongoDbLogger',
         self::CUSTOM_MODEL_INDEX => MongoDbModel::class,
+        self::ADDITIONAL_FIELDS_INDEX => []
     ];
 
     /**
@@ -43,6 +45,7 @@ class LogToMongoDb
             $resultConfig[self::LEVEL_INDEX]
         );
         $handler->setMongoDbModel(new $resultConfig[self::CUSTOM_MODEL_INDEX]);
+        $handler->setAdditionalFields($resultConfig[self::ADDITIONAL_FIELDS_INDEX]);
 
         $processor = new IntrospectionProcessor();
 
